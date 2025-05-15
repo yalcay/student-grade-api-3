@@ -1,0 +1,13 @@
+name: Daily Redeploy on Render
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Her gün sabah 09:00 Türkiye saati (UTC+3)
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Render Deploy Hook securely
+        run: |
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
